@@ -115,7 +115,7 @@ if __name__ == "__main__":
     with open("output.csv",'wb') as outFile:
         wr = csv.writer(outFile)
 
-        headers = ['Description','Scenario','AgentType','Difficulty','TimeToComplete','Strategy','Challenging?','General Comments','Age','Gender','Occupation','ComputerUsage','DominantHand','EnglishAsFirst','ExpWithRobots','ExpWithRCCars','ExpWithFPS','ExpWithRTS','ExpWithRobotComments','InternalUserID']
+        headers = ['Description','Scenario','AgentType','Difficulty','TimeToComplete','Strategy','Challenging','GeneralComments','Age','Gender','Occupation','ComputerUsage','DominantHand','EnglishAsFirst','ExpWithRobots','ExpWithRCCars','ExpWithFPS','ExpWithRTS','ExpWithRobotComments','InternalUserID']
         wr.writerow(headers)
         
         for session in data.keys():
