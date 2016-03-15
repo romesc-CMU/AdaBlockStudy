@@ -26,6 +26,7 @@ expRTSs = df.ExpWithRTS
 expRobComms = df.ExpWithRobotComments 
 usrIDs = df.InternalUserID 
 
+tot_vocab = set([]);
 # current index for block configuration (scenario)
 for c1 in range(1,15):
    for c2 in range(1,3):
@@ -38,6 +39,7 @@ for c1 in range(1,15):
       text = nltk.Text(tokens)
       words = [w.lower() for w in text]
       vocab = sorted(set(words))
+      tot_vocab.update(vocab)
 
       # remove words in removeWords list and punctuation
       removeWords = {'rosario'} # just an example

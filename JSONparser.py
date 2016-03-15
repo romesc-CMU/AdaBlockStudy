@@ -7,7 +7,7 @@ import IPython
 import nltk
 from datetime import datetime
 
-data_filename = "trimmed_merged_data.json"
+data_filename = "90-119_log.json"
 parsed_data_filename = "parsed_" + data_filename
 
 # remove the elements without a 'success' tag
@@ -112,7 +112,7 @@ if __name__ == "__main__":
 
 
 
-    with open("output.csv",'wb') as outFile:
+    with open("output4.csv",'wb') as outFile:
         wr = csv.writer(outFile)
 
         headers = ['Description','Scenario','AgentType','Difficulty','TimeToComplete','Strategy','Challenging','GeneralComments','Age','Gender','Occupation','ComputerUsage','DominantHand','EnglishAsFirst','ExpWithRobots','ExpWithRCCars','ExpWithFPS','ExpWithRTS','ExpWithRobotComments','InternalUserID']
@@ -164,13 +164,14 @@ if __name__ == "__main__":
 
             # parse for scenario descriptions and corresponding scenario specific data
             for idx, field in enumerate(data[session]):
-                if 'image_desc' in field:
-                    desc = field.split('=')[1]
-                    config = data[session][idx-1].split('=')[1]
-                    difficulty = negToNone(data[session][idx+1].split('=')[1])
-                    time = time_elapsed(data[session][idx-2].split('=')[1], data[session][idx+2].split('=')[1])
-                    nextRow = [desc, config, agent, difficulty, time, strat, challenge, comments, age, gender, occupation, compUse, hand, eng, expRobot, expCar, expVGFPS, expVGRTS, seenRobotExp, internalID]
-                    wr.writerow(nextRow)
+                if 'success' in data[session][-1] and len(data[session]) > 100:
+                    if 'image_desc' in field:
+                       desc = field.split('=')[1]
+                       config = data[session][idx-1].split('=')[1]
+                       difficulty = negToNone(data[session][idx+1].split('=')[1])
+                       time = time_elapsed(data[session][idx-2].split('=')[1], data[session][idx+2].split('=')[1])
+                       nextRow = [desc, config, agent, difficulty, time, strat, challenge, comments, age, gender, occupation, compUse, hand, eng, expRobot, expCar, expVGFPS, expVGRTS, seenRobotExp, internalID]
+                       wr.writerow(nextRow)
 
 
 
